@@ -7,7 +7,7 @@ class User:
         self.chat_id = chat_id
     
     def get_user(self):
-        return self.db.find_one({'_id': self.chat_id})
+        return self.db.users.find_one({'_id': self.chat_id})
     
     def get_state(self):
         user = self.get_user()
