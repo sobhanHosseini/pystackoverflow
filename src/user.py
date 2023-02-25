@@ -22,7 +22,7 @@ class User:
             return ''
         
         current_question = '\n\n'.join(current_question)
-        return f':arrow_right: Preview Question\n\n {current_question}'
+        return f':right_arrow: Preview Question\n\n {current_question}'
     
     def update(condition):
         self.db.users.update_one({'_id': self.chat_id}, condition)
