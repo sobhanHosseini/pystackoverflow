@@ -10,4 +10,4 @@ def write_json(data, filename, indent=4):
 
 def read_file(filename):
     with open(filename, 'r') as f:
-        return f.read(f)
+        return f.read()
