@@ -23,6 +23,5 @@ def create_keyboard(*keys, row_width=2, resize_keyboard=True):
 @dataclass
 class Keyboards:
     main:Tuple = create_keyboard(keys.ask_question, keys.settings)
-    exit:Tuple = create_keyboard(keys.exit)
 
 
