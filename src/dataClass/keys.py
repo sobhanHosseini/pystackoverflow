@@ -4,7 +4,7 @@ from dataclasses import dataclass
 class Keys:
     random_connect:str = ':bust_in_silhouette: Random Connect'
     settings:str = ':gear: Settings'
-    cancel:str = ':x: Cancel'
+    cancel:str = ':cross_mark: Cancel'
     back:str = ':arrow_left: Back'
     next:str = ':arrow_right: Next'
     add:str = ':heavy_plus_sign: Add'

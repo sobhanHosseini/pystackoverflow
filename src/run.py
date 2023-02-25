@@ -59,7 +59,6 @@ class Bot:
         
         @self.bot.message_handler(regexp=emoji.emojize(self.keys.ask_question))
         def ask_question(message):
-            print('in ask question funciton...')
             self.send_message_update_state(
                 chat_id=message.chat.id,
                 text=read_file(DATA_DIR / 'guide.html'),
@@ -73,15 +72,15 @@ class Bot:
             user.reset()
             self.send_message_update_state(
                 chat_id=message.chat.id,
-                text=':x: Canceld.',
+                text=':cross_mark: Canceld.',
                 state=self.states.main,
                 reply_markup=self.keyboards.main
                 )
 
         @self.bot.message_handler(regexp=emoji.emojize(self.keys.settings))
         def settings(message):
-            print('in settings...')
-
+            pass
+        
         @self.bot.message_handler(is_admin=True)
         def admin_of_group(message):
             self.send_message(message.chat.id, '<strong>You are admin of this group!</strong>')
@@ -89,9 +88,7 @@ class Bot:
         @self.bot.message_handler(func=lambda ـ: True)
         def echo(message):
             user = User(chat_id=message.chat.id)
-            print(emoji.demojize(message.text))
             if user.get_state() == self.states.ask_question:
-                print('in if...')
                 self.db.users.update_one(
                     {'_id': message.chat.id},
                     {'$push': {'current_question': message.text}}
@@ -124,7 +121,6 @@ class Bot:
         """
         send message and change state of user
         """
-        print('in send_message_update_state ...')
         self.send_message(
                 chat_id,
                 text,
