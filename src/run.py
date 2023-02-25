@@ -17,6 +17,11 @@ class Bot:
         self.bot = telebot
         self.db = mongodb
 
+        # init data class
+        self.keys = keys.Keys()
+        self.keyboards = kb.Keyboards()
+        self.states = states.States()
+        
         # add custom filters
         self.bot.add_custom_filter(IsAdmin())
         self.bot.add_custom_filter(custom_filters.TextMatchFilter())
@@ -49,11 +54,11 @@ class Bot:
                 )
             self.update_state(message.chat.id, self.states.main)
             
-        @self.bot.message_handler(text=[keys.exit])
+        @self.bot.message_handler(text=[self.keys.exit])
         def exit(message):
             pass
 
-        @self.bot.message_handler(text=[keys.settings])
+        @self.bot.message_handler(text=[self.keys.settings])
         def settings(message):
             pass
 
@@ -65,7 +70,7 @@ class Bot:
         def echo(message):
             self.send_message(
                 message.chat.id, message.text,
-                reply_markup=keyboards.main
+                reply_markup=self.keyboards.main
             )
 
     def send_message(self, chat_id, text, reply_markup=None, emojize=True):
