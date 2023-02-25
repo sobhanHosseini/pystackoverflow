@@ -57,7 +57,7 @@ class Bot:
                 )
             self.update_state(message.chat.id, self.states.main)
         
-        @self.bot.message_handler(text=[self.keys.ask_question])
+        @self.bot.message_handler(regexp=emoji.emojize(self.keys.ask_question))
         def ask_question(message):
             print('in ask question funciton...')
             self.send_message_update_state(
@@ -67,7 +67,7 @@ class Bot:
                 reply_markup=self.keyboards.ask_question
                 )
             
-        @self.bot.message_handler(text=[self.keys.cancel])
+        @self.bot.message_handler(regexp=emoji.emojize(self.keys.cancel))
         def cancel(message):
             user = User(chat_id=message.chat.id)
             user.reset()
