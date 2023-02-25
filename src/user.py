@@ -17,7 +17,7 @@ class User:
         """
         get current message
         """
-        user = self.get_user()['current_question']
+        user = self.get_user()
         if not user or not user.get('current_question'):
             return ''
         

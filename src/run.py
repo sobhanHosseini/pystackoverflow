@@ -88,10 +88,8 @@ class Bot:
         @self.bot.message_handler(func=lambda ـ: True)
         def echo(message):
             user = User(chat_id=message.chat.id)
-            print('befor if....')
-            print(user.get_state())
+            
             if user.get_state() == self.states.ask_question:
-                print('after if....')
                 self.db.users.update_one(
                     {'_id': message.chat.id},
                     {'$push': {'current_question': message.text}}
