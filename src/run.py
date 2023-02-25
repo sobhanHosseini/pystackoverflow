@@ -3,10 +3,12 @@ from loguru import logger
 from telebot import custom_filters
 
 from src.bot import bot
+from src.data import DATA_DIR
 from src.dataClass import keyboards as kb
 from src.dataClass import keys, states
 from src.db import db
 from src.filters import IsAdmin
+from src.utils.io import read_file
 
 
 class Bot:
@@ -53,8 +55,17 @@ class Bot:
                 upsert=True
                 )
             self.update_state(message.chat.id, self.states.main)
+        
+        @self.bot.message_handler(text=[self.keys.ask_question])
+        def ask_question(message):
+            self.send_message_update_state(
+                chat_id=message.chat.id,
+                text=read_file(DATA_DIR / 'guide.html'),
+                state=self.states.ask_question,
+                reply_markup=self.keyboards.main
+                )
             
-        @self.bot.message_handler(text=[self.keys.exit])
+        @self.bot.message_handler(text=[self.keys.cancel])
         def exit(message):
             pass
 
@@ -91,6 +102,17 @@ class Bot:
             {'$set':{'state':state}}
             )
 
+    def send_message_update_state(self, chat_id, text, state,reply_markup=None):
+        """
+        send message and change state of user
+        """
+        self.send_message(
+                chat_id,
+                text,
+                reply_markup=reply_markup
+                )
+        self.update_state(chat_id, state)
+        
 
 if __name__ == '__main__':
     logger.info('Bot started')
