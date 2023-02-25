@@ -89,7 +89,7 @@ class Bot:
         @self.bot.message_handler(func=lambda ـ: True)
         def echo(message):
             user = User(chat_id=message.chat.id)
-            print('before if...')
+            print(emoji.demojize(message.text))
             if user.get_state() == self.states.ask_question:
                 print('in if...')
                 self.db.users.update_one(
