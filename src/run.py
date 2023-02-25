@@ -38,7 +38,6 @@ class Bot:
         self.bot.infinity_polling()
 
     def handlers(self):
-        print(self.keys.settings)
         @self.bot.message_handler(commands=['start'])    
         def start(message):
             """
@@ -79,7 +78,7 @@ class Bot:
                 reply_markup=self.keyboards.main
                 )
 
-        @self.bot.message_handler(text=[self.keys.settings])
+        @self.bot.message_handler(regexp=emoji.emojize([self.keys.settings]))
         def settings(message):
             print('in settings...')
 
