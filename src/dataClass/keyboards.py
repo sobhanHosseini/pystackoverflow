@@ -22,7 +22,7 @@ def create_keyboard(*keys, row_width=2, resize_keyboard=True):
 
 @dataclass
 class Keyboards:
-    main:Tuple = create_keyboard(keys.random_connect, keys.setting)
-    exit:Tuple = create_keyboard(keys.exit)
+    main:Tuple = create_keyboard(keys.ask_question, keys.settings)
+    ask_question:Tuple = create_keyboard(keys.cancel, keys.send_question)
 
 
