@@ -80,7 +80,7 @@ class Bot:
 
         @self.bot.message_handler(text=[self.keys.settings])
         def settings(message):
-            pass
+            print('in settings...')
 
         @self.bot.message_handler(is_admin=True)
         def admin_of_group(message):
