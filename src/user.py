@@ -18,11 +18,10 @@ class User:
         get current message
         """
         user = self.get_user()
-        print(type(user))
         if not user or not user.get('current_question'):
             return ''
         
-        current_question = '\n\n'.join(current_question)
+        current_question = '\n\n'.join(user.get('current_question'))
         return f':right_arrow: Preview Question\n\n {current_question}'
     
     def update(self, condition):
