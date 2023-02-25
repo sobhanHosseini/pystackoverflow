@@ -99,7 +99,7 @@ class Bot:
 
                 self.send_message(
                     chat_id=message.chat.id,
-                    text=u.current_question()
+                    text=user.current_question()
                     ) 
 
     def send_message(self, chat_id, text, reply_markup=None, emojize=True):
