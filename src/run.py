@@ -59,6 +59,7 @@ class Bot:
         
         @self.bot.message_handler(text=[self.keys.ask_question])
         def ask_question(message):
+            print('in ask question funciton...')
             self.send_message_update_state(
                 chat_id=message.chat.id,
                 text=read_file(DATA_DIR / 'guide.html'),
@@ -123,6 +124,7 @@ class Bot:
         """
         send message and change state of user
         """
+        print('in send_message_update_state ...')
         self.send_message(
                 chat_id,
                 text,
