@@ -38,6 +38,7 @@ class Bot:
         self.bot.infinity_polling()
 
     def handlers(self):
+        print(self.keys.settings)
         @self.bot.message_handler(commands=['start'])    
         def start(message):
             """
