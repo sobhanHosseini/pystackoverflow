@@ -8,6 +8,7 @@ from src.dataClass import keyboards as kb
 from src.dataClass import keys, states
 from src.db import db
 from src.filters import IsAdmin
+from src.user import User
 from src.utils.io import read_file
 
 
@@ -62,12 +63,19 @@ class Bot:
                 chat_id=message.chat.id,
                 text=read_file(DATA_DIR / 'guide.html'),
                 state=self.states.ask_question,
-                reply_markup=self.keyboards.main
+                reply_markup=self.keyboards.ask_question
                 )
             
         @self.bot.message_handler(text=[self.keys.cancel])
-        def exit(message):
-            pass
+        def cancel(message):
+            user = User(chat_id=message.chat.id)
+            user.reset()
+            self.send_message_update_state(
+                chat_id=message.chat.id,
+                text=':x: Canceld.',
+                state=self.states.main,
+                reply_markup=self.keyboards.main
+                )
 
         @self.bot.message_handler(text=[self.keys.settings])
         def settings(message):
@@ -79,10 +87,18 @@ class Bot:
 
         @self.bot.message_handler(func=lambda ـ: True)
         def echo(message):
-            self.send_message(
-                message.chat.id, message.text,
-                reply_markup=self.keyboards.main
-            )
+            user = User(chat_id=message.chat.id)
+            
+            if user.get_state() == self.states.ask_question:
+                self.db.users.update_one(
+                    {'_id': message.chat.id},
+                    {'$push': {'current_question': message.text}}
+                )
+
+                self.send_message(
+                    chat_id,
+                    u.current_question(),
+                    )
 
     def send_message(self, chat_id, text, reply_markup=None, emojize=True):
         """

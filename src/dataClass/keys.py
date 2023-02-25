@@ -13,6 +13,6 @@ class Keys:
     delete:str = ':wastebasket: Delete'
     yes:str = ':white_check_mark: Yes'
     no:str = ':negative_squared_cross_mark: No'
-    ask_question:str = ':question: Ask a qustion'
-    
+    ask_question:str = ':red_question_mark: Ask a qustion'
+    send_question:str = ':envelope_with_arrow: Send question'
     
