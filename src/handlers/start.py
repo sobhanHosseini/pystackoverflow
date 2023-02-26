@@ -26,7 +26,7 @@ def send_message(chat_id, text, reply_markup=None, emojize=True):
         """
         Send message to telegram bot.
         """
-        if emojize:
-            text = emoji.emojize(text)
+        # if emojize:
+        #     text = emoji.emojize(text)
 
         bot.send_message(chat_id, text, reply_markup=reply_markup)
