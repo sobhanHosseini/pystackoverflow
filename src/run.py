@@ -46,7 +46,7 @@ class Bot:
     ###############################################
     
     def handlers(self):
-        bot.middleware_handler(callback_query_data_cb=test)
+        bot.middleware_handler(callback_query_data_cb=self.test)
         
         @self.bot.message_handler(commands=['start'])    
         def start(message):
