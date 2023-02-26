@@ -1,7 +1,7 @@
-from src.decorators.bot_handler import bot_handler
 from src.message import Message
+from src.base.baseHandler import BaseHandler
 
-class StartHandler:
+class StartHandler(BaseHandler):
     def __init__(self, bot):
         self.bot = bot
         
