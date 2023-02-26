@@ -11,10 +11,7 @@ class StartHandler:
         """
         a = Message(message.chat.id, self.bot)
         a.send(
-            message.chat.id, 
-            # f'Hey <strong>{message.chat.first_name}</strong>',
-            'this message is test....',
-            # reply_markup=self.keyboards.main,
+            text='this message is test....',
             )
         
         # message.json['_id'] = message.chat.id
