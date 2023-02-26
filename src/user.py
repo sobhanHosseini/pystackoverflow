@@ -14,17 +14,11 @@ class User:
     def state(self):
         return self.user.get('state')
     
-    def insert(self, values, upsert=True):
-        self.db.users.update_one(
-            {'_id': self.chat_id},
-            values,
-            upsert=upsert
-            )
-        
     def update(self, values, upsert=True):
         self.db.users.update_one(
             {'_id': self.chat_id},
             values,
+            upsert=upsert
             )
         
     def update_state(self, state):

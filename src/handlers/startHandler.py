@@ -18,7 +18,5 @@ class StartHandler(BaseHandler):
             )
         
         message.json['_id'] = data['chat_id']
-        
         user.update(values={"$set": message.json})
-        
         user.update_state(BaseHandler.states.main)
