@@ -10,5 +10,6 @@ class UserMiddleware(BaseMiddleware):
         chat_id = message.chat.id
         user = User(chat_id)
         
-    def post_process(self, message, user):
-        pass
+    def post_process(self, message, user, exception=None):
+        if exception: 
+            print(exception)
