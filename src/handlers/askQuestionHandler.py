@@ -1,5 +1,7 @@
 from src.base.baseHandler import BaseHandler
+from src.data import DATA_DIR
 from src.message import Message
+from src.utils.io import read_file
 
 
 class AskQuestionHandler(BaseHandler):
@@ -7,4 +9,11 @@ class AskQuestionHandler(BaseHandler):
         self.bot = bot
         
     def handle(self, message, data):
-       pass
+        user = data['user']
+        msg = Message(data['chat_id'], self.bot)
+        msg.send(
+            text=read_file(DATA_DIR / 'guide.html'),
+            reply_markup=self.keyboards.ask_question
+            )
+        
+        user.update_state(self.states.ask_question)

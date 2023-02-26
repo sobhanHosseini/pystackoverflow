@@ -1,12 +1,13 @@
 from abc import ABC, abstractmethod
-from src.dataClass import keyboards, keys, states
+
+from src import dataClass
+
 
 class BaseHandler(ABC):
-    
-    # init data class
-    keys = keys.Keys()
-    keyboards = keyboards.Keyboards()
-    states = states.States()
+    # initial data class
+    keys = dataClass.keys
+    keyboards = dataClass.keyboards
+    states = dataClass.states
     
     @abstractmethod
     def handle(self, message, data):
