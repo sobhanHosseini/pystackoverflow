@@ -42,10 +42,12 @@ class Bot:
         message = callback_query.message
         print(message)
         
-    bot.middleware_handler(test)
+    
     ###############################################
     
     def handlers(self):
+        bot.middleware_handler(test)
+        
         @self.bot.message_handler(commands=['start'])    
         def start(message):
             """
