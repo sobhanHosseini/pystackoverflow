@@ -10,7 +10,7 @@ class StartHandler(BaseHandler):
             /start command handler
         """
         print('-'*50)
-        print(data.user.user)
+        print(data)
         print('-'*50)
         a = Message(message.chat.id, self.bot)
         a.send(
