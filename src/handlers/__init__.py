@@ -7,4 +7,4 @@ s = startHandler.StartHandler(bot)
 
 @bot_handler(commands=['start'])
 def start(message, data):
-    s.handle(message, data)
+    s.handle(message, user)

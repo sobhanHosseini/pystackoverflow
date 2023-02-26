@@ -5,12 +5,12 @@ class StartHandler(BaseHandler):
     def __init__(self, bot):
         self.bot = bot
         
-    def handle(self, message, data):
+    def handle(self, message, user):
         """
             /start command handler
         """
         print('-'*50)
-        print(data)
+        print(user)
         print('-'*50)
         a = Message(message.chat.id, self.bot)
         a.send(
