@@ -5,7 +5,7 @@ class StartHandler(BaseHandler):
     def __init__(self, bot):
         self.bot = bot
         
-    def handle(self, message):
+    def handler(self, message):
         """
             /start command handler
         """

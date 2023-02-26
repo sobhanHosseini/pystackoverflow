@@ -1,9 +1,9 @@
-import src.handlers.start
+import src.handlers.startHandler
 from src.bot import bot
 from src.decorators.bot_handler import bot_handler
 
 
-s = start.StartHandler(bot)
+s = startHandler.StartHandler(bot)
 
 @bot_handler(commands=['start'])
 def start(message):
