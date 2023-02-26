@@ -1,13 +1,13 @@
 import emoji
 
 from src.bot import bot
-from src.dataClass import keys as ky
+from src.dataClass.keys import Keys
 from src.decorators.bot_handler import bot_handler
 from src.handlers import (askQuestionHandler, cancelHandler, echoHandler,
                           settingHandler, startHandler)
 
 # initial keys data class
-keys = ky.Keys()
+keys = Keys()
 
 # initial handlers
 start_handelr = startHandler.StartHandler(bot)
