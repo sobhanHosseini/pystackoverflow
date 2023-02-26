@@ -6,7 +6,7 @@ class StartHandler:
         self.bot = bot
         
     @bot_handler(commands=['start'])    
-    def handle(message):
+    def handle(self, message):
         """
             /start command handler
         """
