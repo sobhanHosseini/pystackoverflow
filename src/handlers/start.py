@@ -11,7 +11,7 @@ def start(message):
         message.chat.id, 
         # f'Hey <strong>{message.chat.first_name}</strong>',
         'this message is test....',
-        reply_markup=self.keyboards.main,
+        # reply_markup=self.keyboards.main,
         )
     
     # message.json['_id'] = message.chat.id
