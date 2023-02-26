@@ -22,7 +22,7 @@ def start(message):
     #     )
     # self.update_state(message.chat.id, self.states.main)
 
-def send_message(self, chat_id, text, reply_markup=None, emojize=True):
+def send_message(chat_id, text, reply_markup=None, emojize=True):
         """
         Send message to telegram bot.
         """
