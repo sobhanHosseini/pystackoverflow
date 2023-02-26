@@ -12,4 +12,5 @@ class UserMiddleware(BaseMiddleware):
         data['user'] = user
         
     def post_process(self, message, data, exception=None):
-        pass
+        if exception: 
+            print(exception)
