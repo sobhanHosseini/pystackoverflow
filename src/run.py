@@ -37,16 +37,20 @@ class Bot:
         logger.info('Bot is running...')
         self.bot.infinity_polling()
       
-    ####################test###########################  
-    def test(callback_query):
-        message = callback_query.message
-        print(message)
-        
+    ####################test########################### 
+    
+    from telebot import apihelper
+
+    apihelper.ENABLE_MIDDLEWARE = True
     
     ###############################################
     
     def handlers(self):   
-        bot.callback_query_handlers.add(test)     
+        @bot.middleware_handler(update_types=['message'])
+        def set_session(bot_instance, message):
+            print(message)
+        
+          
         @self.bot.message_handler(commands=['start'])    
         def start(message):
             """
