@@ -36,7 +36,15 @@ class Bot:
         # run bot
         logger.info('Bot is running...')
         self.bot.infinity_polling()
-
+      
+    ####################test###########################  
+    def test(callback_query):
+        message = callback_query.message
+        print(message)
+        
+    bot.middleware_handler(callback_query_data_cb=test)
+    ###############################################
+    
     def handlers(self):
         @self.bot.message_handler(commands=['start'])    
         def start(message):
@@ -69,7 +77,7 @@ class Bot:
         @self.bot.message_handler(regexp=emoji.emojize(self.keys.cancel))
         def cancel(message):
             user = User(chat_id=message.chat.id)
-            user.reset()
+            user.reset_current_question()
             self.send_message_update_state(
                 chat_id=message.chat.id,
                 text=':cross_mark: Canceld.',
@@ -89,7 +97,7 @@ class Bot:
         def echo(message):
             user = User(chat_id=message.chat.id)
             
-            if user.get_state() == self.states.ask_question:
+            if user.state == self.states.ask_question:
                 self.db.users.update_one(
                     {'_id': message.chat.id},
                     {'$push': {'current_question': message.text}}
