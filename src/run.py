@@ -13,9 +13,9 @@ class Bot:
     """
     def __init__(self):
         # add custom filters
-        self.bot.add_custom_filter(IsAdmin())
-        self.bot.add_custom_filter(custom_filters.TextMatchFilter())
-        self.bot.add_custom_filter(custom_filters.TextStartsFilter())
+        bot.add_custom_filter(IsAdmin())
+        bot.add_custom_filter(custom_filters.TextMatchFilter())
+        bot.add_custom_filter(custom_filters.TextStartsFilter())
 
         # run bot
         logger.info('Bot is running...')
