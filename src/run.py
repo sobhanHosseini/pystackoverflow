@@ -45,9 +45,9 @@ class Bot:
     ###############################################
     
     def handlers(self):   
-        @self.bot.middleware_handler(update_types=['message'])
-        def set_session(bot_instance, message):
-            print(message)
+        # @self.bot.middleware_handler(update_types=['message'])
+        # def set_session(bot_instance, message):
+        #     print(message)
         
           
         # @self.bot.message_handler(commands=['start'])    
