@@ -10,6 +10,7 @@ from src.db import db
 from src.filters import IsAdmin
 from src.user import User
 from src.utils.io import read_file
+from src import handlers
 
 
 class Bot:
@@ -49,24 +50,24 @@ class Bot:
             print(message)
         
           
-        @self.bot.message_handler(commands=['start'])    
-        def start(message):
-            """
-             /start command handler
-            """
-            self.send_message(
-                message.chat.id, 
-                f'Hey <strong>{message.chat.first_name}</strong>',
-                reply_markup=self.keyboards.main,
-                )
+        # @self.bot.message_handler(commands=['start'])    
+        # def start(message):
+        #     """
+        #      /start command handler
+        #     """
+        #     self.send_message(
+        #         message.chat.id, 
+        #         f'Hey <strong>{message.chat.first_name}</strong>',
+        #         reply_markup=self.keyboards.main,
+        #         )
            
-            message.json['_id'] = message.chat.id
-            db.users.update_one(
-                {'_id': message.chat.id}, 
-                {"$set": message.json},
-                upsert=True
-                )
-            self.update_state(message.chat.id, self.states.main)
+        #     message.json['_id'] = message.chat.id
+        #     db.users.update_one(
+        #         {'_id': message.chat.id}, 
+        #         {"$set": message.json},
+        #         upsert=True
+        #         )
+        #     self.update_state(message.chat.id, self.states.main)
         
         @self.bot.message_handler(regexp=emoji.emojize(self.keys.ask_question))
         def ask_question(message):
