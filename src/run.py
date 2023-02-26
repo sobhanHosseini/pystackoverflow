@@ -42,7 +42,7 @@ class Bot:
         message = callback_query.message
         print(message)
         
-    bot.middleware_handler(callback_query_data_cb=test)
+    bot.middleware_handler(test)
     ###############################################
     
     def handlers(self):
