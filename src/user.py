@@ -14,8 +14,27 @@ class User:
     def state(self):
         return self.user.get('state')
     
-    def update(self, condition):
-        self.db.users.update_one({'_id': self.chat_id}, condition)
+    def insert(self, values, upsert=True):
+        self.db.users.update_one(
+            {'_id': self.chat_id},
+            values,
+            upsert=upsert
+            )
+        
+    def update(self, values, upsert=True):
+        self.db.users.update_one(
+            {'_id': self.chat_id},
+            values,
+            )
+        
+    def update_state(self, state):
+        """
+        Update user state.
+        """
+        self.update( 
+            values={'$set':{'state':state}},
+            upsert=False
+            )
             
     def reset_current_question(self):
         """
