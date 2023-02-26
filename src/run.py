@@ -13,7 +13,7 @@ from src.utils.io import read_file
 
 from telebot import apihelper
 
-apihelper.ENABLE_MIDDLEWARE = True
+# apihelper.ENABLE_MIDDLEWARE = True
 
 class Bot:
     """
