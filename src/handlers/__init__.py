@@ -6,5 +6,5 @@ from src.decorators.bot_handler import bot_handler
 s = startHandler.StartHandler(bot)
 
 @bot_handler(commands=['start'])
-def start(message, user):
-    s.handle(message, user)
+def start(message, data):
+    s.handle(message, data)
