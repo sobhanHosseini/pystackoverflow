@@ -14,7 +14,7 @@ class CancelHandler(BaseHandler):
         msg = Message(data['chat_id'], self.bot)
         msg.send(
             text=':cross_mark: Canceled.',
-            reply_markup=BaseHandler.keyboards.main
+            reply_markup=keyboards.main
             )
-        user.update_state(BaseHandler.states.main)
+        user.update_state(states.main)
         user.reset_current_question()

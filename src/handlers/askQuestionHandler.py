@@ -13,7 +13,7 @@ class AskQuestionHandler(BaseHandler):
         msg = Message(data['chat_id'], self.bot)
         msg.send(
             text=read_file(DATA_DIR / 'guide.html'),
-            reply_markup=BaseHandler.keyboards.ask_question
+            reply_markup=keyboards.ask_question
             )
         
-        user.update_state(BaseHandler.states.ask_question)
+        user.update_state(states.ask_question)

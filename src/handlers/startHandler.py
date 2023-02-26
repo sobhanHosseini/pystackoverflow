@@ -14,9 +14,9 @@ class StartHandler(BaseHandler):
         msg = Message(data['chat_id'], self.bot)
         msg.send(
             text=f'Hey <strong>{message.chat.first_name}</strong>',
-            reply_markup=BaseHandler.keyboards.main
+            reply_markup=keyboards.main
             )
         
         message.json['_id'] = data['chat_id']
         user.update(values={"$set": message.json})
-        user.update_state(BaseHandler.states.main)
+        user.update_state(states.main)

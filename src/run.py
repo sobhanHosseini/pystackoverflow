@@ -1,4 +1,3 @@
-import emoji
 from loguru import logger
 from telebot import custom_filters
 
