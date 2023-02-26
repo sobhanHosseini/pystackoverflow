@@ -1,4 +1,4 @@
-import src.bot
+from src.bot import bot
 
 
 def bot_handler(commands=None, regexp=None):
