@@ -1,6 +1,10 @@
+import emoji
+
+
 class Message:
-    def __init__(self, chat_id):
+    def __init__(self, chat_id, bot):
         self.chat_id = chat_id
+        self.bot = bot
     
     def send(self, text, reply_markup=None, emojize=True):
         """

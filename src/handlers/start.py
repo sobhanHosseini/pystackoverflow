@@ -1,32 +1,29 @@
 from src.decorators.bot_handler import bot_handler
-from src.bot import bot
 
 
-@bot_handler(commands=['start'])    
-def start(message):
-    """
-        /start command handler
-    """
-    send_message(
-        message.chat.id, 
-        # f'Hey <strong>{message.chat.first_name}</strong>',
-        'this message is test....',
-        # reply_markup=self.keyboards.main,
-        )
-    
-    # message.json['_id'] = message.chat.id
-    # db.users.update_one(
-    #     {'_id': message.chat.id}, 
-    #     {"$set": message.json},
-    #     upsert=True
-    #     )
-    # self.update_state(message.chat.id, self.states.main)
-
-def send_message(chat_id, text, reply_markup=None, emojize=True):
+class StartHandler:
+    def __init__(self, bot):
+        self.bot = bot
+        
+    @bot_handler(commands=['start'])    
+    def handle(message):
         """
-        Send message to telegram bot.
+            /start command handler
         """
-        # if emojize:
-        #     text = emoji.emojize(text)
+        a = Message(message.chat.id, self.bot)
+        a.send(
+            message.chat.id, 
+            # f'Hey <strong>{message.chat.first_name}</strong>',
+            'this message is test....',
+            # reply_markup=self.keyboards.main,
+            )
+        
+        # message.json['_id'] = message.chat.id
+        # db.users.update_one(
+        #     {'_id': message.chat.id}, 
+        #     {"$set": message.json},
+        #     upsert=True
+        #     )
+        # self.update_state(message.chat.id, self.states.main)
 
-        bot.send_message(chat_id, text, reply_markup=reply_markup)
+
