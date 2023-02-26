@@ -1,4 +1,4 @@
 from src.bot import bot
-from src.middleware.userMiddleware import Middleware
+from src.middleware.userMiddleware import UserMiddleware
 
-bot.setup_middleware(Middleware())
+bot.setup_middleware(UserMiddleware())

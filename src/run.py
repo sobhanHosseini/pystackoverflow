@@ -11,6 +11,7 @@ from src.filters import IsAdmin
 from src.user import User
 from src.utils.io import read_file
 from src import handlers
+from src import middleware
 
 
 class Bot:
