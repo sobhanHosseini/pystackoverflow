@@ -1,5 +1,5 @@
 from src.decorators.bot_handler import bot_handler
-
+from src.message import Message
 
 class StartHandler:
     def __init__(self, bot):
