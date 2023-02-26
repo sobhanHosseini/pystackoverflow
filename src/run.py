@@ -24,4 +24,5 @@ class Bot:
 
 if __name__ == '__main__':
     logger.info('Bot started')
+    Bot()
 
