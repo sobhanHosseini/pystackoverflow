@@ -7,7 +7,7 @@ def start(message):
     """
         /start command handler
     """
-    self.send_message(
+    send_message(
         message.chat.id, 
         # f'Hey <strong>{message.chat.first_name}</strong>',
         'this message is test....',
