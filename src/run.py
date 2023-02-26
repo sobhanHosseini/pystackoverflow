@@ -11,6 +11,9 @@ from src.filters import IsAdmin
 from src.user import User
 from src.utils.io import read_file
 
+from telebot import apihelper
+
+apihelper.ENABLE_MIDDLEWARE = True
 
 class Bot:
     """
@@ -39,9 +42,7 @@ class Bot:
       
     ####################test########################### 
     
-    from telebot import apihelper
-
-    apihelper.ENABLE_MIDDLEWARE = True
+    
     
     ###############################################
     
