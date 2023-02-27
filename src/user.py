@@ -73,7 +73,7 @@ class User:
         logger.info('Save question to database.')
         user = self.user
         
-        self.db.question.inser_one({
+        self.db.question.insert_one({
             'chat_id': self.chat_id,
             'question': user['current_question'],
             'date': self.message.date
