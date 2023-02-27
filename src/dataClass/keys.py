@@ -9,7 +9,7 @@ class Keys:
     next:str = ':arrow_right: Next'
     add:str = ':heavy_plus_sign: Add'
     edit:str = ':pencil: Edit'
-    save:str = ':heavy_check_mark: Save'
+    save:str = ':check_mark_button: Save'
     delete:str = ':wastebasket: Delete'
     yes:str = ':white_check_mark: Yes'
     no:str = ':negative_squared_cross_mark: No'

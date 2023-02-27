@@ -16,5 +16,4 @@ class CancelHandler(BaseHandler):
             text=':cross_mark: Canceled.',
             reply_markup=self.keyboards.main
             )
-        user.update_state(self.states.main)
-        user.reset_current_question()
+        user.reset()

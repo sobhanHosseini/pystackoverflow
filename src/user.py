@@ -1,10 +1,11 @@
 from src.db import db
-from src.dataClass import keys 
+from src.dataClass import keys, states
 
 class User:
-    def __init__(self, chat_id):
+    def __init__(self, chat_id, message):
         self.db = db
         self.chat_id = chat_id
+        self.message = message
     
     @property
     def user(self):
@@ -14,19 +15,24 @@ class User:
     def state(self):
         return self.user.get('state')
     
+    @property
+    def question(self):
+        return '\n'.join(self.user.get('current_question', []))
+    
     @property    
     def current_question(self):
         """
         get current message
         """
         user = self.user
-        if not user or not user.get('current_question'):
+        if not user.get('current_question'):
             return ''
+
+        question_text = f':pencil: <strong>Question Preview</strong>\n\n'
+        question_text += self.question
+        question_text += f'\n{"_" * 40}\n When done, click <strong>{keys.send_question}</strong>'
         
-        current_question = f':pencil: <strong>Question Preview</strong>\n\n'
-        current_question += '\n'.join(user.get('current_question'))
-        current_question += f'\n{"_" * 40}\n When done, click <strong>{keys.send_question}</strong>'
-        return current_question
+        return question_text
     
     def update(self, values, upsert=True):
         self.db.users.update_one(
@@ -44,12 +50,32 @@ class User:
             upsert=False
             )
             
-    def reset_current_question(self):
+    def reset(self):
         """
         Empty Current Question Field
         """
-        self.update({'$set': {'current_question': []}})
+        self.update(
+            {'$set': 
+                {
+                 'current_question': [],
+                 'state': states.main
+                 }
+                }
+            )
     
+    def save_question(self):
+        """
+        Save question to database
+        """
+        logger.info('Save question to database.')
+        user = self.user
+        
+        self.db.question.inser_one({
+            'chat_id': self.chat_id,
+            'question': user['current_question'],
+            'date': self.message.date
+        })
+        self.reset()
         
 
 if __name__ == '__main__':

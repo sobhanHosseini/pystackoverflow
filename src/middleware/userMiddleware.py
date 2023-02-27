@@ -11,7 +11,7 @@ class UserMiddleware(BaseMiddleware):
     
     def pre_process(self, message, data):
         chat_id = message.chat.id
-        user = User(chat_id)
+        user = User(chat_id, message)
         data['user'] = user
         data['chat_id'] = message.chat.id
         message.text = emoji.demojize(message.text)
