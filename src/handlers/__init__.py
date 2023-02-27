@@ -20,15 +20,15 @@ echo_handler = echoHandler.EchoHandler(bot)
 def start(message, data):
     start_handelr.handle(message, data)
 
-@bot_handler(regexp=emoji.emojize(keys.ask_question))
+@bot_handler(regexp=(keys.ask_question))
 def ask_question(message, data):
     ask_question_handler.handle(message, data)
     
-@bot_handler(regexp=emoji.emojize(keys.cancel))
+@bot_handler(regexp=(keys.cancel))
 def cancel(message, data):
     cancel_handler.handle(message, data)
     
-@bot_handler(regexp=emoji.emojize(keys.settings))
+@bot_handler(regexp=(keys.settings))
 def setting(message, data):
     setting_handler.handle(message, data)
     

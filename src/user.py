@@ -23,9 +23,9 @@ class User:
         if not user or not user.get('current_question'):
             return ''
         
-        current_question = f':pencil: Question Preview\n\n'
+        current_question = f':pencil: <strong>Question Preview</strong>\n\n'
         current_question += '\n'.join(user.get('current_question'))
-        current_question += f'\n{"_" * 40}\n When done, click {keys.send_question}'
+        current_question += f'\n{"_" * 40}\n When done, click <strong>{keys.send_question}</strong>'
         return current_question
     
     def update(self, values, upsert=True):
