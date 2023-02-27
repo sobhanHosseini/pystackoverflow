@@ -79,8 +79,7 @@ class User:
             'date': self.message.date
         })
     
-    @staticmethod
-    def get_all_user():
+    def get_all_user(self):
         """
         return all users
         """
