@@ -20,15 +20,15 @@ class Message:
         self.bot.send_message(chat_id, text, reply_markup=reply_markup)
     
     def send_question_to_all(self):
-        current_user = User(self.chat_id)
+        user = User(self.chat_id)
         
         msg_text = ':red_question_mark: <strong>New Question</strong>'
-        msg_text += current_user.question
+        msg_text += user.question
         
-        for user in self.db.users.find():
+        for u in user.get_all_user():
             self.send(
                 text=msg_text,
-                chat_id=user['_id']
+                chat_id=u['_id']
                 )
         
         self.send(text=':check_mark_button: Question sent to all successfully.')

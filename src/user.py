@@ -78,7 +78,12 @@ class User:
             'question': user['current_question'],
             'date': self.message.date
         })
-        
+    
+    def get_all_user():
+        """
+        return all users
+        """
+        return self.db.users.find()
 
 if __name__ == '__main__':
     user = User(chat_id=577049807)
