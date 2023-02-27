@@ -4,7 +4,7 @@ from src.bot import bot
 from src.dataClass.keys import Keys
 from src.decorators.bot_handler import bot_handler
 from src.handlers import (askQuestionHandler, cancelHandler, echoHandler,
-                          settingHandler, startHandler)
+                          settingHandler, startHandler, sendQuestionHandler)
 
 # initial keys data class
 keys = Keys()
@@ -13,6 +13,7 @@ keys = Keys()
 start_handelr = startHandler.StartHandler(bot)
 ask_question_handler = askQuestionHandler.AskQuestionHandler(bot)
 cancel_handler = cancelHandler.CancelHandler(bot)
+send_question_handler = sendQuestionHandler.SendQuestionHandler(bot)
 setting_handler = settingHandler.SettingHandler(bot)
 echo_handler = echoHandler.EchoHandler(bot)
 
@@ -27,6 +28,10 @@ def ask_question(message, data):
 @bot_handler(regexp=keys.cancel)
 def cancel(message, data):
     cancel_handler.handle(message, data)
+    
+@bot_handler(regexp=keys.send_question)
+def send_question(message, data):
+    send_question_handler.handle(message, data)
     
 @bot_handler(regexp=keys.settings)
 def setting(message, data):
