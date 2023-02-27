@@ -5,7 +5,7 @@ from src.db import db
 
 
 class User:
-    def __init__(self, chat_id, message):
+    def __init__(self, chat_id, message=None):
         self.db = db
         self.chat_id = chat_id
         self.message = message
@@ -78,7 +78,6 @@ class User:
             'question': user['current_question'],
             'date': self.message.date
         })
-        self.reset()
         
 
 if __name__ == '__main__':
