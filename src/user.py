@@ -1,5 +1,5 @@
 from src.db import db
-
+from src.dataClass import keys 
 
 class User:
     def __init__(self, chat_id):
@@ -13,6 +13,20 @@ class User:
     @property
     def state(self):
         return self.user.get('state')
+    
+    @property    
+    def current_question(self):
+        """
+        get current message
+        """
+        user = self.user
+        if not user or not user.get('current_question'):
+            return ''
+        
+        current_question = f':pencil: Question Preview\n\n'
+        current_question += '\n'.join(user.get('current_question'))
+        current_question += f'\n{"_" * 40}\n When done, click {keys.send_question}'
+        return current_question
     
     def update(self, values, upsert=True):
         self.db.users.update_one(
@@ -35,16 +49,6 @@ class User:
         Empty Current Question Field
         """
         self.update({'$set': {'current_question': []}})
-        
-    def current_question(self):
-        """
-        get current message
-        """
-        if not self.user or not self.user.get('current_question'):
-            return ''
-        
-        current_question = '\n\n'.join(self.user.get('current_question'))
-        return f':right_arrow: Preview Question\n\n {current_question}'
     
         
 

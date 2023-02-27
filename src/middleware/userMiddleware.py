@@ -1,6 +1,9 @@
+import emoji
 from telebot import TeleBot
 from telebot.handler_backends import BaseMiddleware
+
 from src.user import User
+
 
 class UserMiddleware(BaseMiddleware):
     def __init__(self):
@@ -11,6 +14,7 @@ class UserMiddleware(BaseMiddleware):
         user = User(chat_id)
         data['user'] = user
         data['chat_id'] = message.chat.id
+        message.text = emoji.demojize(message.text)
         
     def post_process(self, message, data, exception=None):
         if exception: 
