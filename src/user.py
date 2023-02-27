@@ -1,5 +1,8 @@
-from src.db import db
+from loguru import logger
+
 from src.dataClass import keys, states
+from src.db import db
+
 
 class User:
     def __init__(self, chat_id, message):
