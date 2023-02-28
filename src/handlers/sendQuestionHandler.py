@@ -13,7 +13,7 @@ class SendQuestionHandler(BaseHandler):
         question = Question(user=user, message_sender=message_sender)
         
         question.save_question()
-        message_sender.send(
+        message_sender.send_message(
             text=':check_mark_button: Question saved successfully.',
             reply_markup=self.keyboards.main
             )

@@ -13,7 +13,7 @@ class StartHandler(BaseHandler):
         user = data['user']
         message_sender = data['message_sender']
         
-        message_sender.send(
+        message_sender.send_message(
             text=f'Hey <strong>{message.chat.first_name}</strong>',
             reply_markup=self.keyboards.main
             )

@@ -12,7 +12,7 @@ class AskQuestionHandler(BaseHandler):
         user = data['user']
         message_sender = data['message_sender']
         
-        message_sender.send(
+        message_sender.send_message(
             text=read_file(DATA_DIR / 'guide.html'),
             reply_markup=self.keyboards.ask_question
             )

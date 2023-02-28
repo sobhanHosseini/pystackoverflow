@@ -13,7 +13,7 @@ class CancelHandler(BaseHandler):
         user = data['user']
         message_sender = data['message_sender']
          
-        message_sender.send(
+        message_sender.send_message(
             text=':cross_mark: Canceled.',
             reply_markup=self.keyboards.main
             )
