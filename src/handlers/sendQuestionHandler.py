@@ -13,7 +13,7 @@ class SendQuestionHandler(BaseHandler):
         question = Question(user=user, message_sender=message_sender)
         
         if not user.user.get('current_question'):
-            return self.message_sender.send_message(
+            return message_sender.send_message(
                 chat_id=self.user.user['_id'],
                 text=':cross_mark: Question is empty'
                 )
