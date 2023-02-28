@@ -1,6 +1,7 @@
 from loguru import logger
 
 from src.db import db
+from src.models.user import User
 
 
 class Question:
