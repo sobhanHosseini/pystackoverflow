@@ -11,8 +11,6 @@ class User:
     def __init__(self, chat_id: int):
         self.db = db
         self.chat_id = chat_id
-        ## check it later
-        self.message = message
     
     @property
     def user(self):
