@@ -17,6 +17,6 @@ class SendQuestionHandler(BaseHandler):
             text=':check_mark_button: Question saved successfully.',
             reply_markup=self.keyboards.main
             )
-        message_sender.send_question_to_all()
+        question.send_question_to_all()
         user.reset()
         
