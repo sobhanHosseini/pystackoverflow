@@ -1,5 +1,5 @@
 from src.base.baseHandler import BaseHandler
-from src.message import Message
+from src.utils.message import Message
 
 
 class EchoHandler(BaseHandler):
@@ -8,12 +8,12 @@ class EchoHandler(BaseHandler):
         
     def handle(self, message, data):
         user = data['user']
-        msg = Message(data['chat_id'], self.bot)
-        
+        message_sender = data['message_sender']
+         
         if user.state == self.states.ask_question:
             user.update(values={'$push': {'current_question': message.text}})
-            msg.send(
-                text=user.current_question()
+            message_sender.send_message(
+                text=user.current_question_preview
             )
         
         

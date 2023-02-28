@@ -1,5 +1,5 @@
 from src.base.baseHandler import BaseHandler
-from src.message import Message
+from src.utils.message import Message
 
 
 class StartHandler(BaseHandler):
@@ -11,12 +11,13 @@ class StartHandler(BaseHandler):
             /start command handler
         """
         user = data['user']
-        msg = Message(data['chat_id'], self.bot)
-        msg.send(
+        message_sender = data['message_sender']
+        
+        message_sender.send_message(
             text=f'Hey <strong>{message.chat.first_name}</strong>',
             reply_markup=self.keyboards.main
             )
         
         message.json['_id'] = data['chat_id']
         user.update(values={"$set": message.json})
-        user.update_state(self.states.main)
+        user.reset()
