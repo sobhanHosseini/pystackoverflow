@@ -26,8 +26,8 @@ class Question:
         user_info = self.user.user
         username = f"@{user_info['chat'].get('username')}"
         firstname = user_info['chat'].get('first_name')
-        text = f":bust_in_silhouette: From: {username or firstname} asked: \n"
-        text += ':red_question_mark: <strong>New Question</strong>\n\n'
+        text = ':red_question_mark: <strong>New Question</strong>\n\n'
+        text += f":bust_in_silhouette: From: {username or firstname}\n"
         text += self.user.current_question
         self.message_sender.send_message_to_all(user=self.user ,text=text)
         

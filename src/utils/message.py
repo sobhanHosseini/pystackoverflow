@@ -29,6 +29,7 @@ class Message(IMessageSender):
         """
         Send message to all user
         """
+        # Send to all users in parallel
         with concurrent.futures.ThreadPoolExecutor() as executor:
             for u in user.get_all_users():
                 executor.submit(
