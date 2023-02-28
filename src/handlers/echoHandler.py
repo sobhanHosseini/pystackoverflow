@@ -1,5 +1,5 @@
 from src.base.baseHandler import BaseHandler
-from src.message import Message
+from src.utils.message import Message
 
 
 class EchoHandler(BaseHandler):

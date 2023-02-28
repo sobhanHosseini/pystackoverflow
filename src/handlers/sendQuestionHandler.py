@@ -1,6 +1,6 @@
 from src.base.baseHandler import BaseHandler
-from src.message import Message
 from src.models.question import Question
+from src.utils.message import Message
 
 
 class SendQuestionHandler(BaseHandler):
