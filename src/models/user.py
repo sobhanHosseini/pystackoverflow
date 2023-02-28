@@ -34,7 +34,7 @@ class User:
             return ''
 
         question_text = f':pencil: <strong>Question Preview</strong>\n\n'
-        question_text += self.question
+        question_text += self.current_question
         question_text += f'\n{"_" * 40}\n When done, click <strong>{keys.send_question}</strong>'
         
         return question_text
