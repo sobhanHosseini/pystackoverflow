@@ -1,13 +1,18 @@
+from typing import List
+
 from loguru import logger
 
+from interfaces import IMessageSender
 from src.dataClass import keys, states
 from src.db import db
 
 
 class User:
-    def __init__(self, chat_id, message=None):
+    def __init__(self, chat_id: int, message_sender: IMessageSender):
         self.db = db
         self.chat_id = chat_id
+        self.message_sender = message_sender
+        ## check it later
         self.message = message
     
     @property
@@ -19,11 +24,11 @@ class User:
         return self.user.get('state')
     
     @property
-    def question(self):
+    def current_question(self):
         return '\n'.join(self.user.get('current_question', []))
     
     @property    
-    def current_question(self):
+    def current_question_preview(self):
         """
         get current message
         """
@@ -66,25 +71,13 @@ class User:
                 }
             )
     
-    def save_question(self):
-        """
-        Save question to database
-        """
-        logger.info('Save question to database.')
-        user = self.user
-        
-        self.db.question.insert_one({
-            'chat_id': self.chat_id,
-            'question': user['current_question'],
-            'date': self.message.date
-        })
-    
-    def get_all_user(self):
+    def get_all_users(self) -> List['User']:
         """
         return all users
         """
         return self.db.users.find()
-
+    
+    
 if __name__ == '__main__':
     user = User(chat_id=577049807)
     print(user.current_question())
