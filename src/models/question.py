@@ -23,6 +23,9 @@ class Question:
         })
         
     def send_question_to_all(self):
+        """
+        send question to all users
+        """
         user_info = self.user.user
         username = f"@{user_info['chat'].get('username')}"
         firstname = user_info['chat'].get('first_name')
