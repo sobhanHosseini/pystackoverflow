@@ -11,8 +11,9 @@ class StartHandler(BaseHandler):
             /start command handler
         """
         user = data['user']
-        msg = Message(data['chat_id'], self.bot)
-        msg.send(
+        message_sender = data['message_sender']
+        
+        message_sender.send(
             text=f'Hey <strong>{message.chat.first_name}</strong>',
             reply_markup=self.keyboards.main
             )

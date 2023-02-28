@@ -9,14 +9,14 @@ class SendQuestionHandler(BaseHandler):
         
     def handle(self, message, data):
         user = data['user']
-        msg = Message(data['chat_id'], self.bot)
-        question = Question(user=user, message_sender=msg)
+        message_sender = data['message_sender']
+        question = Question(user=user, message_sender=message_sender)
         
         question.save_question()
-        msg.send(
+        message_sender.send(
             text=':check_mark_button: Question saved successfully.',
             reply_markup=self.keyboards.main
             )
-        msg.send_question_to_all()
+        message_sender.send_question_to_all()
         user.reset()
         

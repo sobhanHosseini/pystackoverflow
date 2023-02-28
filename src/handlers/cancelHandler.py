@@ -11,8 +11,9 @@ class CancelHandler(BaseHandler):
         click on cancled
         """
         user = data['user']
-        msg = Message(data['chat_id'], self.bot)
-        msg.send(
+        message_sender = data['message_sender']
+         
+        message_sender.send(
             text=':cross_mark: Canceled.',
             reply_markup=self.keyboards.main
             )

@@ -8,10 +8,9 @@ from src.db import db
 
 
 class User:
-    def __init__(self, chat_id: int, message_sender: IMessageSender):
+    def __init__(self, chat_id: int):
         self.db = db
         self.chat_id = chat_id
-        self.message_sender = message_sender
         ## check it later
         self.message = message
     

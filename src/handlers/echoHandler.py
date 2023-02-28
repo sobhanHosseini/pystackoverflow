@@ -8,11 +8,11 @@ class EchoHandler(BaseHandler):
         
     def handle(self, message, data):
         user = data['user']
-        msg = Message(data['chat_id'], self.bot)
-        
+        message_sender = data['message_sender']
+         
         if user.state == self.states.ask_question:
             user.update(values={'$push': {'current_question': message.text}})
-            msg.send(
+            message_sender.send(
                 text=user.current_question
             )
         

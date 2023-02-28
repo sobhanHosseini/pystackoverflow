@@ -18,9 +18,10 @@ class UserMiddleware(BaseMiddleware):
             bot=bot,
             message_info=message
             )
-        user = User(chat_id=chat_id, message_sender=message)
+        user = User(chat_id=chat_id)
         
         data['user'] = user
+        data['message_sender'] = msg
         data['chat_id'] = chat_id
         message.text = emoji.demojize(message.text)
         
