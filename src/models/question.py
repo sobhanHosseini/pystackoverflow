@@ -1,5 +1,6 @@
 from loguru import logger
 
+from interfaces.IMessageSender import IMessageSender
 from src.db import db
 from src.models.user import User
 
