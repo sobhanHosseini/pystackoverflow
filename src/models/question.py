@@ -24,7 +24,7 @@ class Question:
         
     def send_question_to_all(self):
         user = self.user
-        text = ':red_question_mark: <strong>New Question</strong>'
+        text = ':red_question_mark: <strong>New Question</strong>\n\n'
         text += user.current_question
         self.message_sender.send_message_to_all(user=user ,text=text)
         
