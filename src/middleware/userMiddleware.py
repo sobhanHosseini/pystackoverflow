@@ -1,4 +1,5 @@
 import emoji
+from loguru import logger
 from telebot import TeleBot
 from telebot.handler_backends import BaseMiddleware
 
@@ -27,4 +28,5 @@ class UserMiddleware(BaseMiddleware):
         
     def post_process(self, message, data, exception=None):
         if exception: 
+            logger.error('In userMiddleware exception...')
             print(exception)
