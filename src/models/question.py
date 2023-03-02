@@ -23,13 +23,19 @@ class Question:
         })
         
     def send_question_to_all(self):
-        user = self.user
-        text = ':red_question_mark: <strong>New Question</strong>\n\n'
-        text += user.current_question
-        self.message_sender.send_message_to_all(user=user ,text=text)
+        """
+        send question to all users
+        """
+        user_info = self.user.user
+        username = f"@{user_info['chat'].get('username')}"
+        firstname = user_info['chat'].get('first_name')
+        text = ':red_question_mark: <strong>New Question</strong>\n'
+        text += f":bust_in_silhouette: From: {username or firstname}\n\n"
+        text += self.user.current_question
+        self.message_sender.send_message_to_all(user=self.user ,text=text)
         
         self.message_sender.send_message(
-            chat_id=user.user['_id'],
+            chat_id=user_info['_id'],
             text=':check_mark_button: Question sent to all successfully.'
             )
         

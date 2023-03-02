@@ -1,3 +1,4 @@
+import concurrent.futures
 from typing import List
 
 import emoji
@@ -28,9 +29,15 @@ class Message(IMessageSender):
         """
         Send message to all user
         """
-        for u in user.get_all_users():
-            self.send_message(
-                text=text,
-                chat_id=u['_id'],
+        # Send to all users in parallel
+        with concurrent.futures.ThreadPoolExecutor() as executor:
+            for u in user.get_all_users():
+                executor.submit(
+                    self.send_message,
+                    text=text,
+                    chat_id=u['_id'],
                 )
+                
+
+            
         

@@ -12,6 +12,13 @@ class SendQuestionHandler(BaseHandler):
         message_sender = data['message_sender']
         question = Question(user=user, message_sender=message_sender)
         
+        # check not empty question
+        if not user.user.get('current_question'):
+             return message_sender.send_message(
+                chat_id=user.user['_id'],
+                text=':cross_mark: Question is empty'
+                )
+             
         question.save_question()
         message_sender.send_message(
             text=':check_mark_button: Question saved successfully.',
