@@ -37,6 +37,38 @@ class Message(IMessageSender):
                     text=text,
                     chat_id=u['_id'],
                 )
+    
+    def edit_message(self, message_id, text=None, reply_markup=None, emojize: bool = True):
+        """
+        Edit telegram message text and/or reply_markup.
+        """
+        if emojize and text:
+            text = emoji.emojize(text)
+        
+        # if message text or reply_markup is the same as before, telegram raises an invalid request error
+        # so we are doing try/catch to avoid this.
+        
+        try:
+            if text and reply_markup:
+                self.bot.edit_message_text(text=text, chat_id=self.chat_id, reply_markup=reply_markup, message_id=message_id)
+            elif reply_markup:
+                self.bot.edit_message_reply_markup(chat_id=self.chat_id, message_id=message_id, reply_markup=reply_markup)
+            elif text:
+                self.bot.edit_message_text(text=text, chat_id=self.chat_id, message_id=message_id)
+            #TODO
+            # self.update_callback_data(chat_id, message_id, reply_markup)
+        except Exception as e:
+            logger.debug(f'Error editing message: {e}')
+    
+    def answer_callback_query(self, call_id, text, emojize=True):
+        """
+        Answer to a callback query.
+        """
+        if emojize:
+            text = emoji.emojize(text)
+            
+        self.bot.answer_callback_query(call_id, text=text)
+    
                 
 
             

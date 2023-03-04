@@ -3,8 +3,9 @@ import emoji
 from src.bot import bot
 from src.dataClass.keys import Keys
 from src.decorators.bot_handler import bot_handler
-from src.handlers import (askQuestionHandler, cancelHandler, echoHandler,
-                          settingHandler, startHandler, sendQuestionHandler)
+from src.handlers import (askQuestionHandler, callback_query_handlers,
+                          cancelHandler, echoHandler, sendQuestionHandler,
+                          settingHandler, startHandler)
 
 # initial keys data class
 keys = Keys()
@@ -40,7 +41,3 @@ def setting(message, data):
 @bot_handler(func=lambda ـ: True)
 def echo(message, data):
     echo_handler.handle(message, data)
-
-@bot.callback_query_handler(func=lambda call: True)
-def callback_query(call):
-    bot.answer_callback_query(call.id, 'hi;)')

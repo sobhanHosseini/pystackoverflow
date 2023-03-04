@@ -10,7 +10,7 @@ from src.utils.message import Message
 
 class UserMiddleware(BaseMiddleware):
     def __init__(self):
-        self.update_types = ['message']
+        self.update_types = ['message','callback_query']
     
     def pre_process(self, message, data):
         chat_id = message.chat.id
