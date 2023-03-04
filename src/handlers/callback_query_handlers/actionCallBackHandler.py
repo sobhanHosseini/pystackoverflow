@@ -6,7 +6,8 @@ class ActionCallBackHandler(BaseCallbackQueryHandler):
         self.bot = bot
     
     def handle(self, call, data):
-        logger.info('in call back handle...')
-        print(data)
-        print('-' * 50)
+        user = data['user']
+        message_sender = data['message_sender']
+        
+        message_sender.answer_callback_query()
         

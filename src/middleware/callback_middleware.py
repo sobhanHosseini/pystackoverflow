@@ -13,6 +13,9 @@ class CallbackMiddleware(BaseMiddleware):
         self.update_types = ['callback_query']
     
     def pre_process(self, call, data):
+        print('call id: ', call.id)
+        print('chat id: ', call.message.chat.id)
+        print('-' * 50)
         message = call.message
         chat_id = message.chat.id
         msg = Message(
