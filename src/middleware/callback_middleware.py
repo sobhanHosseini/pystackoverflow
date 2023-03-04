@@ -14,6 +14,7 @@ class CallbackMiddleware(BaseMiddleware):
     
     def pre_process(self, call, data):
         print('-' * 50)
+        print('in CallbackMiddleware...')
         print(call)
         print('-' * 50)
         # chat_id = message.chat.id
