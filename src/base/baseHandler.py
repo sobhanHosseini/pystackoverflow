@@ -8,6 +8,8 @@ class BaseHandler(ABC):
     keys = dataClass.keys
     keyboards = dataClass.keyboards
     states = dataClass.states
+    inlineKeyboards = dataClass.inlineKeyboards
+    inlineKeys = dataClass.inlineKeys
     
     @abstractmethod
     def handle(self, message, data):
