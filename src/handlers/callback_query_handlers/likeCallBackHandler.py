@@ -1,7 +1,7 @@
 from src.base.baseCallbackQueryHandler import BaseCallbackQueryHandler
 from loguru import logger
 
-class ActionCallBackHandler(BaseCallbackQueryHandler):
+class LikeCallBackHandler(BaseCallbackQueryHandler):
     def __init__(self, bot):
         self.bot = bot
     
@@ -10,5 +10,4 @@ class ActionCallBackHandler(BaseCallbackQueryHandler):
         message_sender = data['message_sender']
         
         message_sender.answer_callback_query(call.id, text=call.data)
-        message_sender.edit_message(call.message.message_id, reply_markup=self.inlineKeyboards.actions)
         

@@ -5,9 +5,8 @@ from src import dataClass
 
 class BaseCallbackQueryHandler(ABC):
     # initial data class
-    keys = dataClass.keys
-    keyboards = dataClass.keyboards
-    states = dataClass.states
+    inlineKeyboards = dataClass.inlineKeyboards
+    inlineKeys = dataClass.inlineKeys
     
     @abstractmethod
     def handle(self, message, data):
