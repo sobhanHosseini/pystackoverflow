@@ -43,7 +43,4 @@ def echo(message, data):
 
 @bot.callback_query_handler(func=lambda call: True)
 def callback_query(call):
-    print('-' * 50)
-    print('in call back')
-    print(call)
-    print('-' * 50)
+    bot.answer_callback_query(call.id, 'hi;)')
