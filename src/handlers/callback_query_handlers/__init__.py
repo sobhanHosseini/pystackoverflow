@@ -1,5 +1,5 @@
 from src.bot import bot
-from src.decorators.bot_handler import callback_query_handler
+from src.decorators.callback_query_handler import callback_query_handler
 from src.handlers.callback_query_handlers import actionCallBackHandler
 
 actionCallBack = actionCallBackHandler.ActionCallBackHandler(bot)
