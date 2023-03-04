@@ -7,4 +7,4 @@ class InlineKeys:
     answer:str = ':bright_button: Answer'
     follow:str = ':plus: Follow'
     unfollow:str = ':minus: Unfollow',
-    like:str = ':red_heart:'
+    like:str = ':red_heart: Like'

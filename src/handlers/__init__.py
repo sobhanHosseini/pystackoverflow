@@ -40,3 +40,8 @@ def setting(message, data):
 @bot_handler(func=lambda ـ: True)
 def echo(message, data):
     echo_handler.handle(message, data)
+
+@bot.callback_query_handler(func=lambda call: True)
+def callback_query(call):
+    print('in call back')
+    print(call)
