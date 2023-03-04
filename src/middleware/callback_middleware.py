@@ -13,22 +13,19 @@ class CallbackMiddleware(BaseMiddleware):
         self.update_types = ['callback_query']
     
     def pre_process(self, call, data):
-        print('-' * 50)
-        print('in CallbackMiddleware...')
-        print(call)
-        print('-' * 50)
-        # chat_id = message.chat.id
-        # msg = Message(
-        #     chat_id=chat_id,
-        #     bot=bot,
-        #     message_info=message
-        #     )
-        # user = User(chat_id=chat_id)
+        message = call.message
+        chat_id = message.chat.id
+        msg = Message(
+            chat_id=chat_id,
+            bot=bot,
+            message_info=message
+            )
+        user = User(chat_id=chat_id)
         
-        # data['user'] = user
-        # data['message_sender'] = msg
-        # data['chat_id'] = chat_id
-        # message.text = emoji.demojize(message.text)
+        data['user'] = user
+        data['message_sender'] = msg
+        data['chat_id'] = chat_id
+        message.text = emoji.demojize(message.text)
         
     def post_process(self, message, data, exception=None):
         if exception: 

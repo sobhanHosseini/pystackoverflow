@@ -6,7 +6,7 @@ class ActionCallBackHandler(BaseCallbackQueryHandler):
         self.bot = bot
     
     def handle(self, call, data):
-        # logger.info('in call back handle...')
-        # print(data)
-        # print('-' * 50)
-        pass
+        logger.info('in call back handle...')
+        print(data)
+        print('-' * 50)
+        

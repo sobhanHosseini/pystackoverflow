@@ -13,10 +13,6 @@ class UserMiddleware(BaseMiddleware):
         self.update_types = ['message']
     
     def pre_process(self, message, data):
-        print('-' * 50)
-        print('in UserMiddleware...')
-        print(message)
-        print('-' * 50)
         chat_id = message.chat.id
         msg = Message(
             chat_id=chat_id,
