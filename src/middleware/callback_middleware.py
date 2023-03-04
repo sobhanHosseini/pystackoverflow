@@ -15,6 +15,7 @@ class CallbackMiddleware(BaseMiddleware):
     def pre_process(self, call, data):
         message = call.message
         chat_id = message.chat.id
+        call.data = emoji.demojize(call.data)
         
         msg = Message(
             chat_id=chat_id,
