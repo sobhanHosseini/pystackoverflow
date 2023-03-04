@@ -9,7 +9,7 @@ inlineKeys = InlineKeys()
 
 # initial callback query handlers
 actionCallBack = actionCallBackHandler.ActionCallBackHandler(bot)
-likeCallBack = likeCallBackHandler.likeCallBackHandler(bot)
+likeCallBack = likeCallBackHandler.LikeCallBackHandler(bot)
 
 
 @callback_query_handler(func=lambda call: call.data == inlineKeys.actions)
