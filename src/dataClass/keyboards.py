@@ -41,7 +41,7 @@ def create_keyboard(*keys, reply_row_width=2, inline_row_with=4,
         
     else:   
         markup =  types.ReplyKeyboardMarkup(
-            reply_row_width=reply_row_width,
+            row_width=reply_row_width,
             resize_keyboard=resize_keyboard
         )
         
