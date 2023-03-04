@@ -44,7 +44,7 @@ def create_keyboard(*keys, reply_row_width=2, inline_row_with=4,
 @dataclass
 class InlineKeyboards:
     main:Tuple = create_keyboard(inlineKeys.actions, inlineKeys.like, is_inline=True)
-    actions:Tuple = create_keyboard(inlineKeys.back, inlineKeys.answer, inlineKeys.follow, is_inline=True)
+    actions:Tuple = create_keyboard(inlineKeys.back, inlineKeys.answer, inlineKeys.follow, inlineKeys.unfollow, is_inline=True)
 
 
 
