@@ -1,6 +1,6 @@
 from src.base.baseHandler import BaseHandler
 from src.utils.message import Message
-
+import emoji
 
 class EchoHandler(BaseHandler):
     def __init__(self, bot):
@@ -9,7 +9,7 @@ class EchoHandler(BaseHandler):
     def handle(self, message, data):
         user = data['user']
         message_sender = data['message_sender']
-         
+        print(emoji.demojize(message.text))
         if user.state == self.states.ask_question:
             user.update(values={'$push': {'current_question': message.text}})
             message_sender.send_message(
