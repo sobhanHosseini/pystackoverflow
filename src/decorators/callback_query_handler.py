@@ -7,8 +7,8 @@ def callback_query_handler(func=None):
     """
     def decorator(f):
         if func is not None:
-            bot.callback_query_handlers(func=func)(f)
+            bot.callback_query_handler(func=func)(f)
         else:
-            bot.callback_query_handlers()(f)
+            bot.callback_query_handler()(f)
         return f
     return decorator
