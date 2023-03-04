@@ -4,9 +4,9 @@ from typing import Tuple
 import emoji
 from telebot import types
 
-from src.dataClass import keys
+from src.dataClass import inlineKeys
 
-keys = keys.Keys()
+inlineKeys = inlineKeys.InlineKeys()
 
 def create_keyboard(*keys, reply_row_width=2, inline_row_with=4,
                     resize_keyboard=True, is_inline=False, callback_data=None):
@@ -20,7 +20,6 @@ def create_keyboard(*keys, reply_row_width=2, inline_row_with=4,
     :param callback_data: If not None, use keys text as callback data.
     """
     keys = list(map(emoji.emojize, keys))
-
     
     # Empty keyboard
     if not keys: 
@@ -28,7 +27,7 @@ def create_keyboard(*keys, reply_row_width=2, inline_row_with=4,
     
     if is_inline:
         # create inline keyboard
-        markup = types.InlineKeyboardMarkup(reply_row_width)
+        markup = types.InlineKeyboardMarkup(row_width=reply_row_width)
         
         # set callback data to keys text
         if callback_data is None:
@@ -38,21 +37,14 @@ def create_keyboard(*keys, reply_row_width=2, inline_row_with=4,
         for key, callback in zip(keys, callback_data):
             button = types.InlineKeyboardButton(key, callback_data=callback)
             buttons.append(button)
-        
-    else:   
-        markup =  types.ReplyKeyboardMarkup(
-            row_width=reply_row_width,
-            resize_keyboard=resize_keyboard
-        )
-        
-        buttons = map(types.KeyboardButton, keys)
     
-    markup.add(*buttons)     
+    markup.add(*buttons)  
     return markup
 
 @dataclass
-class Keyboards:
-    main:Tuple = create_keyboard(keys.ask_question, keys.settings)
-    ask_question:Tuple = create_keyboard(keys.cancel, keys.send_question)
+class InlineKeyboards:
+    main:Tuple = create_keyboard(inlineKeys.actions, inlineKeys.like, is_inline=True)
+    actions:Tuple = create_keyboard(inlineKeys.back, inlineKeys.answer, inlineKeys.follow, inlineKeys.unfollow, is_inline=True)
+
 
 

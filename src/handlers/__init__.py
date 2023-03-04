@@ -3,8 +3,9 @@ import emoji
 from src.bot import bot
 from src.dataClass.keys import Keys
 from src.decorators.bot_handler import bot_handler
-from src.handlers import (askQuestionHandler, cancelHandler, echoHandler,
-                          settingHandler, startHandler, sendQuestionHandler)
+from src.handlers import (askQuestionHandler, callback_query_handlers,
+                          cancelHandler, echoHandler, sendQuestionHandler,
+                          settingHandler, startHandler)
 
 # initial keys data class
 keys = Keys()
