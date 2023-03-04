@@ -13,7 +13,8 @@ class EchoHandler(BaseHandler):
         if user.state == self.states.ask_question:
             user.update(values={'$push': {'current_question': message.text}})
             message_sender.send_message(
-                text=user.current_question_preview
+                text=user.current_question_preview,
+                reply_markup=self.inlineKeyboards.main
             )
         
         

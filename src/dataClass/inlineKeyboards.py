@@ -4,9 +4,9 @@ from typing import Tuple
 import emoji
 from telebot import types
 
-from src.dataClass import keys
+from src.dataClass import inlineKeys
 
-keys = keys.Keys()
+inlineKeys = inlineKeys.InlineKeys()
 
 def create_keyboard(*keys, reply_row_width=2, inline_row_with=4,
                     resize_keyboard=True, is_inline=False, callback_data=None):
@@ -51,8 +51,7 @@ def create_keyboard(*keys, reply_row_width=2, inline_row_with=4,
     return markup
 
 @dataclass
-class Keyboards:
-    main:Tuple = create_keyboard(keys.ask_question, keys.settings)
-    ask_question:Tuple = create_keyboard(keys.cancel, keys.send_question)
+class InlineKeyboards:
+    main:Tuple = create_keyboard(inlineKeys.actions, inlineKeys.like, is_inline=True)
 
 
