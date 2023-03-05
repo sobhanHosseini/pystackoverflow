@@ -7,16 +7,15 @@ class EchoHandler(BaseHandler):
         self.bot = bot
         
     def handle(self, message, data):
-        # user = data['user']
-        # message_sender = data['message_sender']
+        user = data['user']
+        message_sender = data['message_sender']
 
-        print(message.json)
-        # if user.state == self.states.ask_question:
-        #     user.update(values={'$push': {'current_question': message.text}})
-        #     message_sender.send_message(
-        #         text=user.current_question_preview,
-        #         reply_markup=self.inlineKeyboards.main
-        #     )
+        if user.state == self.states.ask_question:
+            user.update(values={'$push': {'current_question': message.text}})
+            message_sender.send_message(
+                text=user.current_question_preview,
+                reply_markup=self.inlineKeyboards.main
+            )
         
         
         
