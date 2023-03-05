@@ -19,11 +19,11 @@ class UserMiddleware(BaseMiddleware):
             bot=bot,
             message_info=message
             )
-        # user = User(chat_id=chat_id)
+        user = User(chat_id=chat_id)
         
-        # data['user'] = user
-        # data['message_sender'] = msg
-        # data['chat_id'] = chat_id
+        data['user'] = user
+        data['message_sender'] = msg
+        data['chat_id'] = chat_id
         # message.text = emoji.demojize(message.text)
         
     def post_process(self, message, data, exception=None):
