@@ -10,6 +10,7 @@ class EchoHandler(BaseHandler):
         user = data['user']
         message_sender = data['message_sender']
 
+        print(message.text)
         if user.state == self.states.ask_question:
             user.update(values={'$push': {'current_question': message.text}})
             message_sender.send_message(
