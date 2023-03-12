@@ -4,14 +4,22 @@ from loguru import logger
 
 from interfaces.IMessageSender import IMessageSender
 from src import constants
+from src.dataClass import keys, inlineKeys
+from src.dataClass.inlineKeyboards import create_keyboard
 from src.db import db
 from src.models.user import User
+from src.utils.common import human_readable_size, json_encoder
 
 
 class Question:
     def __init__(self, user: User, message_sender: IMessageSender):
         self.user = user
         self.message_sender = message_sender
+        self.db = db
+    
+    @property
+    def question(self):
+        return self.db.question.find_one({'chat_id': self.user.chat_id})
     
     def save_question(self):
         """
@@ -43,31 +51,72 @@ class Question:
             )
     
 
-    # def update(self, message):
-    #     if message.content_type not in constants.SUPPORTED_CONTENT_TYPES:
-    #         return
+    def update(self, message):
+        if message.content_type not in constants.SUPPORTED_CONTENT_TYPES:
+            return
         
-    #     elif message.content_type == 'text':
-    #         push_data = {'text': message.html_text}
-    #     else:
-    #         content = getattr(message, message.content_type)
-    #         content = vars(content[-1]) if isinstance(content, list) else vars(content)
-    #         content['content_type'] = message.content_type
+        elif message.content_type == 'text':
+            push_data = {'text': message.html_text}
+        else:
+            content = getattr(message, message.content_type)
+            content = vars(content[-1]) if isinstance(content, list) else vars(content)
+            content['content_type'] = message.content_type
 
-    #         content = self.remove_non_json_data(content)
-    #         push_data = {'attachments': content}
+            # removing non json serializable data
+            content = self.remove_non_json_data(content)
+            push_data = {'attachments': content}
             
-    #         set_data = {
-    #             'data': message.data,
-    #             'type': None,
-    #             'replied_to_post_id': None
-    #         }
-    #         set_data = {'date': message.date, 'type': self.post_type, 'replied_to_post_id': replied_to_post_id}
-    #         output = self.collection.update_one({'chat.id': message.chat.id, 'status': post_status.PREP}, {
-    #             '$push': push_data, '$set': set_data,
-    #         }, upsert=True)
-            
+        # save to database
+        # TODO change none
+        set_data = {
+            'date': message.date,
+            'type': None,
+            'replied_to_post_id': None
+        }
+        
+        # TODO change none
+        db.question.update_one(
+            {'chat_id': message.chat.id, 'status': None},
+            {
+                '$push': push_data,
+                '$set': set_data
+            },
+            upsert=True
+        )
     
+    @staticmethod
     def remove_non_json_data(json_data):
         return json.loads(json.dumps(json_data, default=json_encoder))
+    
+    def get_text(self):
+        """
+        get current message
+        """
+        question = self.question
+        if not question.get('text'):
+            return ''
+
+        question_text = f':pencil: <strong>Question Preview</strong>\n\n'
+        question_text += '\n'.join(question.get('text', []))
+        question_text += f'\n{"_" * 40}\n When done, click <strong>{keys.send_question}</strong>'
         
+        return question_text
+    
+    def get_keyboard(self):
+        keys = [inlineKeys.actions, inlineKeys.like,]
+        callback_data = [inlineKeys.actions, inlineKeys.like,]
+
+        for attachment in self.question.get('attachments',[]):
+            file_name = attachment.get('file_name') or attachment['content_type']
+            file_size = human_readable_size(attachment['file_size'])
+            keys.append(f"{file_name} - {file_size}")
+            callback_data.append(attachment['file_unique_id'])
+            
+        return create_keyboard(*keys, callback_data=callback_data, is_inline=True)
+    
+    def reset_question(self):
+        self.db.question.update_one(
+            {'chat_id': self.user.chat_id},
+            {'$set': {'text': [], 'attachments': []}},
+            upsert=True
+            )

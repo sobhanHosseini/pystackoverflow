@@ -1,4 +1,8 @@
+import json
+
 from src.base.baseHandler import BaseHandler
+from src.models.question import Question
+from src.utils.common import json_encoder
 from src.utils.message import Message
 
 
@@ -10,12 +14,17 @@ class EchoHandler(BaseHandler):
         user = data['user']
         message_sender = data['message_sender']
 
+
         if user.state == self.states.ask_question:
-            user.update(values={'$push': {'current_question': message.text}})
+            question = Question(user=user, message_sender=message_sender)
+            
+            question.update(message)
+            
             message_sender.send_message(
-                text=user.current_question_preview,
-                reply_markup=self.inlineKeyboards.main
+                text=question.get_text(),
+                reply_markup=question.get_keyboard()
             )
+
         
         
         
