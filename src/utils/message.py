@@ -2,6 +2,7 @@ import concurrent.futures
 from typing import List
 
 import emoji
+from loguru import logger
 
 from src.interfaces.IMessageSender import IMessageSender
 from src.models.user import User
@@ -69,7 +70,7 @@ class Message(IMessageSender):
             
         self.bot.answer_callback_query(call_id, text=text)
     
-                
+    
 
             
         

@@ -8,6 +8,6 @@ class LikeCallBackHandler(BaseCallbackQueryHandler):
     def handle(self, call, data):
         user = data['user']
         message_sender = data['message_sender']
-        print(call.message)
+        
         message_sender.answer_callback_query(call.id, text=call.data)
         

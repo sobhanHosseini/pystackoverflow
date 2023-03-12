@@ -120,3 +120,16 @@ class Question:
             {'$set': {'text': [], 'attachments': []}},
             upsert=True
             )
+    
+    def file_unique_id_to_metadata(self, file_unique_id):
+        """
+        Get file metadata having a file_id.
+        """
+        query_result = self.db.question.find_one(
+            {'attachments.file_unique_id': file_unique_id},
+            {'attachments.$':1}
+        )
+        if not query_result:
+            return
+        
+        return query_result['attachments'][0]
