@@ -1,5 +1,6 @@
 import emoji
 
+from src import constants
 from src.bot import bot
 from src.dataClass.keys import Keys
 from src.decorators.bot_handler import bot_handler
@@ -38,6 +39,6 @@ def send_question(message, data):
 def setting(message, data):
     setting_handler.handle(message, data)
     
-@bot_handler(func=lambda ـ: True)
+@bot_handler(content_types=constants.SUPPORTED_CONTENT_TYPES)
 def echo(message, data):
     echo_handler.handle(message, data)

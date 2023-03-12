@@ -1,12 +1,4 @@
-class Test:
-    def __init__(self, a):
-        self.a = a
-    
-    @classmethod
-    def g(cls):
-        print(cls.a)
+from bson import ObjectId
 
-af = Test(1234)
-
-af.g()
-    
+post_id = ObjectId()
+print(post_id)

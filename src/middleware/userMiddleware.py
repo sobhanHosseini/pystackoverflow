@@ -24,7 +24,10 @@ class UserMiddleware(BaseMiddleware):
         data['user'] = user
         data['message_sender'] = msg
         data['chat_id'] = chat_id
-        message.text = emoji.demojize(message.text)
+        
+        # Demojize text
+        if message.content_type == 'text':
+            message.text = emoji.demojize(message.text)
         
     def post_process(self, message, data, exception=None):
         if exception: 
