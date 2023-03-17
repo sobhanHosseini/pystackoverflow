@@ -54,5 +54,6 @@ def create_keyboard(*keys, reply_row_width=2, inline_row_with=4,
 class Keyboards:
     main:Tuple = create_keyboard(keys.ask_question, keys.settings)
     ask_question:Tuple = create_keyboard(keys.cancel, keys.send_question)
+    answer_question:Tuple = create_keyboard(keys.cancel, keys.send_answer)
 
 

@@ -2,6 +2,7 @@ from src.bot import bot
 from src.dataClass.inlineKeys import InlineKeys
 from src.decorators.callback_query_handler import callback_query_handler
 from src.handlers.callback_query_handlers import (actionCallBackHandler,
+                                                  answerCallBackHandler,
                                                   backCallBackHandler,
                                                   likeCallBackHandler,
                                                   mainCallBackHandler)
@@ -14,6 +15,7 @@ actionCallBack = actionCallBackHandler.ActionCallBackHandler(bot)
 likeCallBack = likeCallBackHandler.LikeCallBackHandler(bot)
 backCallBackHandler = backCallBackHandler.BackCallBackHandler(bot)
 mainCallBackHandler = mainCallBackHandler.MainCallBackHandler(bot)
+answerCallBackHandler = answerCallBackHandler.AnswerCallBackHandler(bot)
 
 
 @callback_query_handler(func=lambda call: call.data == inlineKeys.actions)
@@ -27,6 +29,10 @@ def like_callback(call, data):
 @callback_query_handler(func=lambda call: call.data == inlineKeys.back)
 def back_callback(call, data):
     backCallBackHandler.handle(call, data)
+    
+@callback_query_handler(func=lambda call: call.data == inlineKeys.answer)
+def answer_callback(call, data):
+    answerCallBackHandler.handle(call, data)
     
 @callback_query_handler(func=lambda call: True)
 def main_callback(call, data):

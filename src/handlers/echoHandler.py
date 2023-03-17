@@ -22,6 +22,9 @@ class EchoHandler(BaseHandler):
                 reply_markup=question.get_keyboard(),
                 question_id=question_id 
             )
+        
+        elif user.state == self.states.answer_question:
+            pass
 
         
         
