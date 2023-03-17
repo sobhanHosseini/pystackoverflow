@@ -1,4 +1,7 @@
+from loguru import logger
+
 from src.base.baseHandler import BaseHandler
+from src.models.callback_data import CallbackData
 from src.models.question import Question
 from src.utils.message import Message
 
@@ -13,17 +16,17 @@ class SendQuestionHandler(BaseHandler):
         question = Question(user=user, message_sender=message_sender)
         
         # check not empty question
-        if not user.user.get('current_question'):
+        if not question.question.get('text', []):
              return message_sender.send_message(
                 chat_id=user.user['_id'],
                 text=':cross_mark: Question is empty'
                 )
-             
-        question.save_question()
+        question_id = question.save_question()
         message_sender.send_message(
             text=':check_mark_button: Question saved successfully.',
-            reply_markup=self.keyboards.main
+            reply_markup=self.keyboards.main,
+            question_id=question_id
             )
-        question.send_question_to_all()
+        question.send_question_to_all(question_id=question_id)
         user.reset()
         

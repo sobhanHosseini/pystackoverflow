@@ -5,6 +5,7 @@ import emoji
 from loguru import logger
 
 from src.interfaces.IMessageSender import IMessageSender
+from src.models.callback_data import CallbackData
 from src.models.user import User
 
 
@@ -14,7 +15,14 @@ class Message(IMessageSender):
         self.chat_id = chat_id
         self.message_info=message_info
     
-    def send_message(self, text: str, reply_markup: List=None, emojize: bool=True, chat_id: int=None) -> None:
+    def send_message(
+        self,
+        text: str,
+        reply_markup: List=None, 
+        emojize: bool=True,
+        chat_id: int=None,
+        question_id=None
+        ):
         """
         Send message to telegram bot.
         """
@@ -24,9 +32,12 @@ class Message(IMessageSender):
         if emojize:
             text = emoji.emojize(text)
 
-        self.bot.send_message(chat_id, text, reply_markup=reply_markup)
-    
-    def send_message_to_all(self,user: User, text: str) -> None:
+        message = self.bot.send_message(chat_id, text, reply_markup=reply_markup)
+  
+        callback_data = CallbackData(chat_id, message.message_id, question_id)
+        callback_data.update(reply_markup=reply_markup)
+        
+    def send_message_to_all(self,user: User, text: str, reply_markup: List=None, question_id=None):
         """
         Send message to all user
         """
@@ -37,6 +48,8 @@ class Message(IMessageSender):
                     self.send_message,
                     text=text,
                     chat_id=u['_id'],
+                    reply_markup=reply_markup,
+                    question_id=question_id
                 )
     
     def edit_message(self, message_id, text=None, reply_markup=None, emojize: bool = True):
